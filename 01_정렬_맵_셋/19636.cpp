@@ -7,7 +7,7 @@ int main()
 {
     int w0, bmr, t, day, e_in, amr;
 
-    cin >> w0 >> bmr >> t; // 체중, 기초대사랑, T
+    cin >> w0 >> bmr >> t; // 체중, 기초대사랑, T(역치)
     cin >> day >> e_in >> amr; // 기간, 일일에너지섭취량, 일일활동대사량
 
     int w1 = w0; // 기초대사량 변화 반영 X
