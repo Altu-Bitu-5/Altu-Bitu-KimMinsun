@@ -1,0 +1,37 @@
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+int main()
+{
+    int w0, bmr, t, day, e_in, amr;
+
+    cin >> w0 >> bmr >> t;
+    cin >> day >> e_in >> amr;
+
+    int w1 = w0; // 기초대사량 변화 반영 X
+    int w2 = w0; // 기초대사량 변화 반영 O
+    int bmr2= bmr;
+
+    for (int i= 0; i < day; i++){
+        w1 += e_in - (bmr + amr);
+        w2 += e_in - (bmr2 + amr);
+
+        if (abs(e_in - (bmr2 + amr)) > t)
+            bmr2 += floor((e_in - (bmr2 + amr)) / 2.);
+    }
+
+    if (w1 <= 0 || bmr2 <= 0)
+        cout << "Danger Diet" << "\n";
+    else
+        cout << w1 << " " << bmr << endl;
+
+    cout << w2 << " " << bmr2 << " ";
+    if (bmr - bmr2 > 0)
+        cout << "YOYO";
+    else
+        cout << "NO";
+
+    return 0;
+}
