@@ -22,13 +22,20 @@ int main()
             bmr2 += floor((e_in - (bmr2 + amr)) / 2.);
     }
 
-    if (w1 <= 0) // 기초대사랑 변화 반영X 
+    // 기초대사랑 변화 반영X 
+    if (w1 <= 0) { 
         cout << "Danger Diet" << endl;
-    else
+    }
+        
+    else{
         cout << w1 << " " << bmr << endl;
+    }
     
-    if (w2 <= 0 || bmr2 <= 0) // 기초대사랑 변화 반영o, 체중 또는 일일기초대사량이 0이하가 되면 Danger Diet를 출력해주어야 한다.
+    // 기초대사랑 변화 반영o, 체중 또는 일일기초대사량이 0이하가 되면 Danger Diet를 출력해주어야 한다.
+    if (w2 <= 0 || bmr2 <= 0) {
         cout << "Danger Diet" << endl;
+    }
+        
     else{
         cout << w2 << " " << bmr2 << " ";
         if (bmr - bmr2 > 0)
