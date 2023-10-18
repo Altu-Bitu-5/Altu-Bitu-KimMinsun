@@ -1,61 +1,51 @@
 #include <iostream>
+#include <vector>
+#include <algorithm>
+
 using namespace std;
 
-int n;
-int nums[11]; //숫자들
-int operators[4]; //연산자
-int minRes = 1000000001;
-int maxRes = -1000000001;
+int n, m;
+vector<int> res;
+vector<int> nums;
 
-void calc(int result, int idx)
-{
-    if(idx == n)
-    {
-        if(result > maxRes){
-            maxRes = result;
+void dfs(int x){
+
+    //output
+    if(x == m){
+        for(int i= 0; i < x; i++){
+            cout << res[i] << " ";
         }
-        if(result < minRes){
-            minRes = result;
-        }
-        return;
+        cout << "\n";
     }
-    for(int i = 0; i < 4; i++)
-    {
 
-        if(operators[i] > 0)
-        {
-            operators[i]--; // 사용했으니 -1
-            if(i == 0){
-                calc(result + nums[idx], idx+1);
-            }
-            else if(i == 1){
-                calc(result - nums[idx], idx+1);
-            }
-            else if(i == 2){
-                calc(result * nums[idx], idx+1);
-            }
-            else{
-                calc(result / nums[idx], idx+1);
-            }
-            operators[i]++; // 복구 +1
+    //
+    else{
+        int tmp = -1;
+        for(int i= 0; i < n; i++){
+            if(tmp == nums[i]) continue;
+            tmp = nums[i]; // 바로 이전에 선택한 숫자
+            res.push_back(nums[i]);
+            dfs(x+1);
+            res.pop_back();
         }
     }
+
     return;
 }
-int main() {
 
-    //input
-    cin >> n;
+int main()
+{
+    cin >> n >> m;
 
-    for(int i = 0; i < n; i++)
-        cin >> nums[i];
-    for(int i = 0; i < 4; i++)
-        cin >> operators[i];
+    for(int i= 0; i < n; i++){
+        int num;
+        cin >> num;
+        nums.push_back(num);
+    }
 
-    //calculation
-    calc(nums[0],1);
-    
-    //output
-    cout << maxRes << '\n';
-    cout << minRes << endl;
+    sort(nums.begin(), nums.end());
+
+    dfs(0);
+
+    return 0;
 }
